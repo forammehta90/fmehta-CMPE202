@@ -166,7 +166,7 @@ public class ClassParser {
 		{
 			if( n instanceof ClassOrInterfaceDeclaration)
 			{
-				map.put(((ClassOrInterfaceDeclaration)n).getName(),(ClassOrInterfaceDeclaration)n);
+				/*map.put(((ClassOrInterfaceDeclaration)n).getName(),(ClassOrInterfaceDeclaration)n);*/
 			}
 		}	
 		
