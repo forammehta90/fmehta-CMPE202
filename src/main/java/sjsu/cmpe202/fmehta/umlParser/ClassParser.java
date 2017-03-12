@@ -129,11 +129,11 @@ public class ClassParser {
 		
 		Type t = fd.getType();
 		
-/*		if ( t instanceof ReferenceType)
+		if ( t instanceof ReferenceType)
 		{
 			Type type = ((ReferenceType) t).getType();
 		}
-		else*/
+		else
 		
 		printType(fd);
 		
@@ -166,7 +166,7 @@ public class ClassParser {
 		{
 			if( n instanceof ClassOrInterfaceDeclaration)
 			{
-				/*map.put(((ClassOrInterfaceDeclaration)n).getName(),(ClassOrInterfaceDeclaration)n);*/
+				map.put(((ClassOrInterfaceDeclaration)n).getName(),(ClassOrInterfaceDeclaration)n);
 			}
 		}	
 		
