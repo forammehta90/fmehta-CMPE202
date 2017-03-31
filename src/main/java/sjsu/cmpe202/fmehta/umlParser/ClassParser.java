@@ -19,6 +19,7 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.ReferenceType;
 import com.github.javaparser.ast.type.Type;
 
@@ -30,6 +31,7 @@ public class ClassParser {
 	private final String filename;
 	private String classUML ="";
 	private HashMap<String, ClassOrInterfaceDeclaration> map = new HashMap<String, ClassOrInterfaceDeclaration>();
+	ClassOrInterfaceDeclaration currCID = null;
 	
 	public ClassParser(String path, String filename) {
 		this.path = path;
@@ -96,6 +98,8 @@ public class ClassParser {
 	}
 
 	private void getClassOrInterface(ClassOrInterfaceDeclaration cid) {
+		this.currCID = cid;
+		
 	    if (cid.isInterface())
 		{
 	    	classUML += "interface " + cid.getName() + " {\n";
@@ -129,13 +133,30 @@ public class ClassParser {
 		
 		Type t = fd.getType();
 		
-		if ( t instanceof ReferenceType)
+		if ( t instanceof ClassOrInterfaceType )
+		{
+			if (((ReferenceType) t).getArrayCount() > 0)
+			{
+				if (map.containsKey(((ClassOrInterfaceType) t).getName()))
+				{
+					buildRelation((ClassOrInterfaceType) t,"*");
+				}
+			}
+		}
+		
+/*		if ( t instanceof ReferenceType)
 		{
 			Type type = ((ReferenceType) t).getType();
 		}
 		else
-		
+	*/	
 		printType(fd);
+		
+	}
+
+	private void buildRelation(ClassOrInterfaceType t, String multiplicity) {
+		ClassOrInterfaceDeclaration dependCID = map.get(t.getName());
+		
 		
 	}
 
@@ -155,7 +176,7 @@ public class ClassParser {
 				s="";
 				break;
 		}
-		System.out.println("s" + s); //foram
+		System.out.println("s" + s); 
 		classUML += s + " " +  fd.getVariables().get(0) + " ";
 		classUML += ": " + fd.getType() + "\n";
 	}
