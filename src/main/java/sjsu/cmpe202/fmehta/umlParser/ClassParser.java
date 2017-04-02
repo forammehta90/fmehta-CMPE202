@@ -185,9 +185,9 @@ public class ClassParser {
 		List<Node> nodes = cu.getChildrenNodes();
 		for (Node n : nodes)
 		{
-			/*if( n instanceof ClassOrInterfaceDeclaration)
+			if( n instanceof ClassOrInterfaceDeclaration)
 			{
-				map.put(((ClassOrInterfaceDeclaration)n).getName(),(ClassOrInterfaceDeclaration)n);*/
+				map.put(((ClassOrInterfaceDeclaration)n).getName(),(ClassOrInterfaceDeclaration)n);
 			}
 		}	
 		
