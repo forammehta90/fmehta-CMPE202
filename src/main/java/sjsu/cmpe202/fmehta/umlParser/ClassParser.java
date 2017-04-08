@@ -144,12 +144,12 @@ public class ClassParser {
 			}
 		}
 		
-/*		if ( t instanceof ReferenceType)
+		if ( t instanceof ReferenceType)
 		{
 			Type type = ((ReferenceType) t).getType();
 		}
 		else
-	*/	
+		
 		printType(fd);
 		
 	}

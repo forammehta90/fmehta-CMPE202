@@ -310,7 +310,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YCrT2gCmEeeHqdJzi1nz-A" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_vqqfoAKiEeeMpJOn_7y5BQ" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_YCw0NACmEeeHqdJzi1nz-A"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_JPbLIBtAEeeh2_EIlDkrUw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_YCw0NACmEeeHqdJzi1nz-A"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YCrT6ACmEeeHqdJzi1nz-A" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -340,7 +340,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YCrUQwCmEeeHqdJzi1nz-A" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_vqti8AKiEeeMpJOn_7y5BQ" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_YCwz2QCmEeeHqdJzi1nz-A"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_JPeOcRtAEeeh2_EIlDkrUw" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_YCwz2QCmEeeHqdJzi1nz-A"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YCrUTwCmEeeHqdJzi1nz-A" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -938,6 +938,7 @@
   <bindingTables xmi:id="_YCsiuwCmEeeHqdJzi1nz-A" bindingContext="_YCtIuQCmEeeHqdJzi1nz-A"/>
   <bindingTables xmi:id="_YCsivACmEeeHqdJzi1nz-A" bindingContext="_YCtIugCmEeeHqdJzi1nz-A"/>
   <bindingTables xmi:id="_YCsivQCmEeeHqdJzi1nz-A" bindingContext="_YCtIuwCmEeeHqdJzi1nz-A"/>
+  <bindingTables xmi:id="_JN46ERtAEeeh2_EIlDkrUw" bindingContext="_JN46EBtAEeeh2_EIlDkrUw"/>
   <rootContext xmi:id="_YCsivgCmEeeHqdJzi1nz-A" elementId="org.eclipse.ui.contexts.dialogAndWindow" contributorURI="platform:/plugin/org.eclipse.platform" name="In Dialogs and Windows" description="Either a dialog or a window is open">
     <children xmi:id="_YCsivwCmEeeHqdJzi1nz-A" elementId="org.eclipse.ui.contexts.window" contributorURI="platform:/plugin/org.eclipse.platform" name="In Windows" description="A window is open">
       <children xmi:id="_YCsiwACmEeeHqdJzi1nz-A" elementId="org.eclipse.e4.ui.contexts.views" contributorURI="platform:/plugin/org.eclipse.platform" name="%bindingcontext.name.bindingView"/>
@@ -1058,6 +1059,7 @@
   <rootContext xmi:id="_YCtIuQCmEeeHqdJzi1nz-A" elementId="org.eclipse.wst.server.ui.internal.webbrowser.actionSet" name="Auto::org.eclipse.wst.server.ui.internal.webbrowser.actionSet"/>
   <rootContext xmi:id="_YCtIugCmEeeHqdJzi1nz-A" elementId="org.eclipse.wst.web.ui.wizardsActionSet" name="Auto::org.eclipse.wst.web.ui.wizardsActionSet"/>
   <rootContext xmi:id="_YCtIuwCmEeeHqdJzi1nz-A" elementId="org.eclipse.wst.ws.explorer.explorer" name="Auto::org.eclipse.wst.ws.explorer.explorer"/>
+  <rootContext xmi:id="_JN46EBtAEeeh2_EIlDkrUw" elementId="com.objectaid.uml.cls.global" name="Auto::com.objectaid.uml.cls.global"/>
   <descriptors xmi:id="_YCtIvACmEeeHqdJzi1nz-A" elementId="org.eclipse.e4.ui.compatibility.editor" allowMultiple="true" category="org.eclipse.e4.primaryDataStack" closeable="true" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor">
     <tags>Editor</tags>
   </descriptors>
