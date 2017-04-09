@@ -69,12 +69,28 @@ public class ClassParser {
 		{
 			getClassOrInterface(entry.getValue());
 		}
+		
+		printRelationShip();
+		
 		classUML += "@enduml\n";
 		System.out.println(classUML);
 		drawClass(filename,classUML);
 	}
 	
-	
+    private void printRelationShip() {
+        for (Map.Entry<String, UmlRelation> entry : relationMap.entrySet()) {
+            UmlRelation r = entry.getValue();
+            classUML += r.getA().getName() + " ";
+            if (r.getType() == UmlRelationType.AS && r.getMultiplicityA().length() > 0) {
+            	classUML += "\"" + r.getMultiplicityA() + "\"";	
+            }
+            classUML += " " + r.getType().getS() + " ";
+            if (r.getType() == UmlRelationType.AS && r.getMultiplicityB().length() > 0) {
+                classUML += "\"" + r.getMultiplicityB() + "\"";
+            }
+            classUML += " " + r.getB().getName() + "\n";
+        }
+    }	
 	
 
 	private void drawClass(String fname, String input) {
@@ -162,9 +178,8 @@ public class ClassParser {
 			{	// String s; Collection<String>
 				printType(fd);
 			}
-			
 		}
-		
+		// int i ; int[] i
 		printType(fd);
 		
 	}
