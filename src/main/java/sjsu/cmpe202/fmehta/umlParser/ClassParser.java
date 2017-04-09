@@ -136,36 +136,56 @@ public class ClassParser {
 		Type t = fd.getType();
 		
 		if ( t instanceof ClassOrInterfaceType )
-		{
+		{	
 			if (((ReferenceType) t).getArrayCount() > 0)
-			{
+			{	// A a[]
 				if (map.containsKey(((ClassOrInterfaceType) t).getName()))
 				{
 					buildRelation((ClassOrInterfaceType) t,"*");
 				}
 			}
+			else if (((ClassOrInterfaceType) t).getTypeArgs() != null)
+			{	// Collection<A>
+				Type typeArg = ((ClassOrInterfaceType) t).getTypeArgs().get(0);
+				if ( typeArg instanceof ClassOrInterfaceType )
+				{
+                    if (map.containsKey(((ClassOrInterfaceType) typeArg).getName())) {
+                        buildRelation((ClassOrInterfaceType) typeArg, "*");
+                    }                    	
+				}
+			}
+			else if (map.containsKey(((ClassOrInterfaceType) t).getName())) {
+                    // A a,
+                	buildRelation((ClassOrInterfaceType) t, "1");
+                }
+			else
+			{	// String s; Collection<String>
+				printType(fd);
+			}
+			
 		}
 		
-	/*	if ( t instanceof ReferenceType)
-		{
-			Type type = ((ReferenceType) t).getType();
-		}
-		else
-*/		
 		printType(fd);
 		
 	}
 
 	private void buildRelation(ClassOrInterfaceType t, String multiplicity) {
 		ClassOrInterfaceDeclaration dependCID = map.get(t.getName());
-		String relationKey = getASRelationKey(currCID.getName(), dependCID.getName());
-        if (relationMap.containsKey(relationKey)) {
-            UmlRelation r = relationMap.get(relationKey);
+		String assosciateKey = getAssosciation(currCID.getName(), dependCID.getName());
+        if (relationMap.containsKey(assosciateKey)) {
+            UmlRelation r = relationMap.get(assosciateKey);
             r.setMultiplicityA(multiplicity);
+        }
+        else {
+        	relationMap.put(assosciateKey, new UmlRelation(currCID,
+                    "",
+                    dependCID,
+                    multiplicity,
+                    UmlRelationType.AS));
         }
 	}
 	
-    private String getASRelationKey(String name1, String name2) {
+    private String getAssosciation(String name1, String name2) {
         if (name1.compareTo(name2) < 0) {
             return name1 + "_" + name2;
         }
