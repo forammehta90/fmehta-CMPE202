@@ -32,6 +32,7 @@ public class ClassParser {
 	private String classUML ="";
 	private HashMap<String, ClassOrInterfaceDeclaration> map = new HashMap<String, ClassOrInterfaceDeclaration>();
 	ClassOrInterfaceDeclaration currCID = null;
+	private Map<String, UmlRelationship> relationshipMap = new HashMap<Object, Object>();
 	
 	public ClassParser(String path, String filename) {
 		this.path = path;
@@ -156,8 +157,11 @@ public class ClassParser {
 
 	private void buildRelation(ClassOrInterfaceType t, String multiplicity) {
 		ClassOrInterfaceDeclaration dependCID = map.get(t.getName());
-		
-		
+		String relationKey = get(currCID.getName(), dependCID.getName());
+        if (relationshipMap.containsKey(relationKey)) {
+            UmlRelationship r = relationshipMap.get(relationKey);
+            r.setMultiplicityA(multiplicity);
+        }
 	}
 
 	private void printType(FieldDeclaration fd) {
