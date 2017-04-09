@@ -70,25 +70,25 @@ public class ClassParser {
 			getClassOrInterface(entry.getValue());
 		}
 		
-		printRelationShip();
+		printUMLRelation();
 		
 		classUML += "@enduml\n";
 		System.out.println(classUML);
 		drawClass(filename,classUML);
 	}
 	
-    private void printRelationShip() {
+    private void printUMLRelation() {
         for (Map.Entry<String, UmlRelation> entry : relationMap.entrySet()) {
-            UmlRelation r = entry.getValue();
-            classUML += r.getA().getName() + " ";
-            if (r.getType() == UmlRelationType.AS && r.getMultiplicityA().length() > 0) {
-            	classUML += "\"" + r.getMultiplicityA() + "\"";	
+            UmlRelation rel = entry.getValue();
+            classUML += rel.getA().getName() + " ";
+            if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityA().length() > 0) {
+            	classUML += "\"" + rel.getMultiplicityA() + "\"";	
             }
-            classUML += " " + r.getType().getS() + " ";
-            if (r.getType() == UmlRelationType.AS && r.getMultiplicityB().length() > 0) {
-                classUML += "\"" + r.getMultiplicityB() + "\"";
+            classUML += " " + rel.getType().getS() + " ";
+            if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityB().length() > 0) {
+                classUML += "\"" + rel.getMultiplicityB() + "\"";
             }
-            classUML += " " + r.getB().getName() + "\n";
+            classUML += " " + rel.getB().getName() + "\n";
         }
     }	
 	
