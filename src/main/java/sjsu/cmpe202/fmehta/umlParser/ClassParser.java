@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.github.javaparser.JavaParser;
@@ -32,7 +33,7 @@ public class ClassParser {
 	private String classUML ="";
 	private HashMap<String, ClassOrInterfaceDeclaration> map = new HashMap<String, ClassOrInterfaceDeclaration>();
 	ClassOrInterfaceDeclaration currCID = null;
-	private Map<String, UmlRelationship> relationshipMap = new HashMap<Object, Object>();
+	private Map<String, UmlRelation> relationMap = new HashMap<String, UmlRelation>();
 	
 	public ClassParser(String path, String filename) {
 		this.path = path;
@@ -157,12 +158,19 @@ public class ClassParser {
 
 	private void buildRelation(ClassOrInterfaceType t, String multiplicity) {
 		ClassOrInterfaceDeclaration dependCID = map.get(t.getName());
-		String relationKey = get(currCID.getName(), dependCID.getName());
-        if (relationshipMap.containsKey(relationKey)) {
-            UmlRelationship r = relationshipMap.get(relationKey);
+		String relationKey = getASRelationKey(currCID.getName(), dependCID.getName());
+        if (relationMap.containsKey(relationKey)) {
+            UmlRelation r = relationMap.get(relationKey);
             r.setMultiplicityA(multiplicity);
         }
 	}
+	
+    private String getASRelationKey(String name1, String name2) {
+        if (name1.compareTo(name2) < 0) {
+            return name1 + "_" + name2;
+        }
+        return name2 + "_" + name1;
+    }
 
 	private void printType(FieldDeclaration fd) {
 		int mod = fd.getModifiers();
