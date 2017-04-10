@@ -1,8 +1,4 @@
+public class B {
  
-
-public interface B {
- 
-	public float a;
-	 
+	public A a;
 }
- 

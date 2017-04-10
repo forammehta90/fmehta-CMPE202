@@ -151,36 +151,42 @@ public class ClassParser {
 		
 		Type t = fd.getType();
 		
-		if ( t instanceof ClassOrInterfaceType )
+		if (t instanceof ReferenceType) 
 		{	
-			if (((ReferenceType) t).getArrayCount() > 0)
-			{	// A a[]
-				if (map.containsKey(((ClassOrInterfaceType) t).getName()))
-				{
-					buildRelation((ClassOrInterfaceType) t,"*");
+			Type refType = ((ReferenceType) t).getType();
+			if (refType instanceof ClassOrInterfaceType) {
+				if (((ReferenceType) t).getArrayCount() > 0) { // A a[]
+					if (map.containsKey(((ClassOrInterfaceType) refType).getName())) {
+						buildRelation((ClassOrInterfaceType) refType, "*");
+					}
+				} else if (((ClassOrInterfaceType) refType).getTypeArgs() != null) { 
+					// Collection<A>
+					System.out.println("((ClassOrInterfaceType) refType).getTypeArgs()" + ((ClassOrInterfaceType) refType).getTypeArgs());
+					Type refArg = ((ClassOrInterfaceType) refType).getTypeArgs().get(0);
+					if (refArg instanceof ReferenceType) {
+                    	Type subType = ((ReferenceType) refArg).getType();
+                  if (subType instanceof ClassOrInterfaceType) {
+						if (map.containsKey(((ClassOrInterfaceType) subType).getName())) {
+							buildRelation((ClassOrInterfaceType) subType, "*");
+						}
+					}
+					}
+				} else if (map.containsKey(((ClassOrInterfaceType) refType).getName())) {
+					// A a,
+					buildRelation((ClassOrInterfaceType) refType, "1");
+				} else { // String s; Collection<String>
+					printType(fd);
 				}
 			}
-			else if (((ClassOrInterfaceType) t).getTypeArgs() != null)
-			{	// Collection<A>
-				Type typeArg = ((ClassOrInterfaceType) t).getTypeArgs().get(0);
-				if ( typeArg instanceof ClassOrInterfaceType )
-				{
-                    if (map.containsKey(((ClassOrInterfaceType) typeArg).getName())) {
-                        buildRelation((ClassOrInterfaceType) typeArg, "*");
-                    }                    	
-				}
-			}
-			else if (map.containsKey(((ClassOrInterfaceType) t).getName())) {
-                    // A a,
-                	buildRelation((ClassOrInterfaceType) t, "1");
-                }
-			else
-			{	// String s; Collection<String>
+			else {
 				printType(fd);
 			}
 		}
 		// int i ; int[] i
-		printType(fd);
+		else
+		{
+			printType(fd);
+		}
 		
 	}
 
