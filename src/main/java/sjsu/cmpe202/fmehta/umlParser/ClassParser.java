@@ -20,6 +20,7 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.ReferenceType;
 import com.github.javaparser.ast.type.Type;
@@ -41,7 +42,7 @@ public class ClassParser {
 	}
 
 	public void start() {
-		
+			
 		classUML = "" ;
 		classUML += "@startuml\n";
 		
@@ -138,10 +139,17 @@ public class ClassParser {
 			if (n instanceof FieldDeclaration)
 			{
 				getFieldDetails((FieldDeclaration)n);
-			}
+			} else if (n instanceof MethodDeclaration) {
+                getMethodDetails((MethodDeclaration) n);
 			
-		}
+			}
 		classUML += "}\n" ;	
+		}
+	}
+
+	private void getMethodDetails(MethodDeclaration n) {
+		
+		
 	}
 
 	private void getFieldDetails(FieldDeclaration fd) {

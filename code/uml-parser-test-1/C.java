@@ -1,6 +1,6 @@
  
 
-public class B {
+public class C {
  
 	private A a;
 	 
