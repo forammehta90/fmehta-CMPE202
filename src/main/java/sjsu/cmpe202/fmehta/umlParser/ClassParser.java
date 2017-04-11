@@ -147,12 +147,18 @@ public class ClassParser {
 		}
 	}
 
-	private void getMethodDetails(MethodDeclaration n) {
+	private void getMethodDetails(MethodDeclaration md) {
+		if (md.getModifiers() != Modifier.PUBLIC)
+		return;
+		
 		
 		
 	}
 
 	private void getFieldDetails(FieldDeclaration fd) {
+		
+		String ret = null;
+		
 		/* Including Private and Public Attributes */
 		if (fd.getModifiers() != Modifier.PRIVATE && fd.getModifiers() != Modifier.PUBLIC)
 			return;
@@ -183,17 +189,23 @@ public class ClassParser {
 					// A a,
 					buildRelation((ClassOrInterfaceType) refType, "1");
 				} else { // String s; Collection<String>
-					printType(fd);
+					 ret = printType(fd.getModifiers());
+					 classUML += ret + " " +  fd.getVariables().get(0) + " ";
+					 classUML += ": " + fd.getType() + "\n";
 				}
 			}
 			else {
-				printType(fd);
+				 ret = printType(fd.getModifiers());
+				 classUML += ret + " " +  fd.getVariables().get(0) + " ";
+				 classUML += ": " + fd.getType() + "\n";
 			}
 		}
 		// int i ; int[] i
 		else
 		{
-			printType(fd);
+			 ret = printType(fd.getModifiers());
+			 classUML += ret + " " +  fd.getVariables().get(0) + " ";
+			 classUML += ": " + fd.getType() + "\n";
 		}
 		
 	}
@@ -221,9 +233,7 @@ public class ClassParser {
         return name2 + "_" + name1;
     }
 
-	private void printType(FieldDeclaration fd) {
-		int mod = fd.getModifiers();
-		
+	private String printType(int mod) {
 		String s;
 		switch (mod)
 		{
@@ -238,8 +248,7 @@ public class ClassParser {
 				break;
 		}
 		System.out.println("s" + s); 
-		classUML += s + " " +  fd.getVariables().get(0) + " ";
-		classUML += ": " + fd.getType() + "\n";
+		return s;
 	}
 
 	private void mapInsert(CompilationUnit cu) {
