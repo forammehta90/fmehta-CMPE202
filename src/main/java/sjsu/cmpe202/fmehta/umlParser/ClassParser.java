@@ -168,8 +168,26 @@ public class ClassParser {
 					classUML += ", " ;
 				}
 				classUML += p.getId().getName() + " : " + t;
+				Type type = ((ReferenceType) t).getType();
+                if (type instanceof ClassOrInterfaceType) {
+                    String depKeyname = ((ClassOrInterfaceType) type).getName();
+                    if (map.containsKey(depKeyname) ) {
+                    		printDependency(depKeyname);
+                    }
+                }
 			}
 		}
+	}
+	
+	private void printDependency(String depKeyname) {
+		ClassOrInterfaceDeclaration depCID = map.get(depKeyname);
+    	String depKey = getAssosciation(depKeyname, currCID.getName());
+        if (!relationMap.containsKey(depKey) && depCID.isInterface()) {
+            relationMap.put(depKey,
+                    new UmlRelation(depCID, "", this.currCID, "", UmlRelationType.DEP));
+        }
+
+		
 	}
 
 	private void getFieldDetails(FieldDeclaration fd) {
