@@ -21,6 +21,7 @@ import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.ReferenceType;
 import com.github.javaparser.ast.type.Type;
@@ -151,8 +152,24 @@ public class ClassParser {
 		if (md.getModifiers() != Modifier.PUBLIC)
 		return;
 		
+		String ret = printType(md.getModifiers());
+		classUML += ret + md.getName() + "( " ;
 		
+		List<Parameter> parameters = md.getParameters();
 		
+		if (parameters != null && parameters.size() > 0)
+		{
+			int x = 0;
+			for (Parameter p : parameters)
+			{
+				Type t = p .getType();
+				if ( x >0 )
+				{
+					classUML += ", " ;
+				}
+				classUML += p.getId().getName() + " : " + t;
+			}
+		}
 	}
 
 	private void getFieldDetails(FieldDeclaration fd) {
