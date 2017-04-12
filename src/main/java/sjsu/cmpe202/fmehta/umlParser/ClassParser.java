@@ -24,6 +24,7 @@ import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.body.VariableDeclaratorId;
+import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.ReferenceType;
 import com.github.javaparser.ast.type.Type;
@@ -187,8 +188,17 @@ public class ClassParser {
                 }
 			}
 		}
+		classUML += ") : " + md.getType() + "\n" ;
+		BlockStmt body = md.getBody();
+        printBody(attributeMap, attributeNameMap, body);
 	}
 	
+	private void printBody(Map<String, List<VariableDeclaratorId>> attributeMap, Map<String, String> attributeNameMap,
+			BlockStmt body) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void printDependency(String depKeyname) {
 		ClassOrInterfaceDeclaration depCID = map.get(depKeyname);
     	String depKey = getAssosciation(depKeyname, currCID.getName());
