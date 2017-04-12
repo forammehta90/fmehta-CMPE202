@@ -139,6 +139,32 @@ public class ClassParser {
 			classUML += "class " + cid.getName() + " {\n" ;
 			parseBody(cid);
 		}
+        // 2. inheritance
+        List<ClassOrInterfaceType> inheritanceList = cid.getExtends();
+        if (inheritanceList != null) {
+            for (ClassOrInterfaceType classType : inheritanceList) {
+                String name = classType.getName();
+                if (map.containsKey(name)) {
+                    String relationKey = name + "_" + cid.getName();
+                    relationMap.put(relationKey,
+                            new UmlRelation(map.get(name), "", cid, "", UmlRelationType.EX));
+                }
+            }
+        }
+
+        // 3. implementation
+        List<ClassOrInterfaceType> interfaceList = cid.getImplements();
+        if (interfaceList != null) {
+            for (ClassOrInterfaceType interfaceType : interfaceList) {
+                String name = interfaceType.getName();
+                if (map.containsKey(name)) {
+                    String relationKey = name + "_" + cid.getName();
+                    relationMap.put(relationKey,
+                            new UmlRelation(map.get(name), "", cid, "", UmlRelationType.IM));
+                }
+            }
+        }
+	    
 		
 	}
 
