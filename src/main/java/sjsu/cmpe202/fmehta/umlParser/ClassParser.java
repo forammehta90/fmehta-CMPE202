@@ -20,11 +20,17 @@ import com.github.javaparser.ParseException;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.body.VariableDeclaratorId;
+import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.MethodCallExpr;
+import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.stmt.ExpressionStmt;
+import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.ReferenceType;
 import com.github.javaparser.ast.type.Type;
@@ -145,10 +151,55 @@ public class ClassParser {
 				getFieldDetails((FieldDeclaration)n);
 			} else if (n instanceof MethodDeclaration) {
                 getMethodDetails((MethodDeclaration) n);
-			
+			} else if (n instanceof ConstructorDeclaration) {
+                getConstructorDetails((ConstructorDeclaration) n);
 			}
 		classUML += "}\n" ;	
 		}
+	}
+
+	private void getConstructorDetails(ConstructorDeclaration cd) {
+		if (cd.getModifiers() != Modifier.PUBLIC)
+		return;
+		
+		String ret = printType(cd.getModifiers());
+		classUML += ret + cd.getName() + "( " ;
+		
+		List<Parameter> parameters = cd.getParameters();
+        Map<String, List<VariableDeclaratorId>> attributeMap = new HashMap<>();
+
+        Map<String, String> attributeNameMap = new HashMap<>();
+		
+		if (parameters != null && parameters.size() > 0)
+		{
+			int x = 0;
+			for (Parameter p : parameters)
+			{
+				Type t = p .getType();
+				if ( x >0 )
+				{
+					classUML += ", " ;
+				}
+				classUML += p.getId().getName() + " : " + t;
+				Type type = ((ReferenceType) t).getType();
+                if (type instanceof ClassOrInterfaceType) {
+                    String depKeyname = ((ClassOrInterfaceType) type).getName();
+                    if (map.containsKey(depKeyname) ) {
+                    		printDependency(depKeyname);
+                            List<VariableDeclaratorId> methodId = new LinkedList<>();
+                            methodId.add(p.getId());
+                            attributeMap.put(depKeyname, methodId);
+                            attributeNameMap.put(p.getId().getName(), depKeyname);
+
+                    }
+                }
+			}
+		}
+		classUML += ")\n" ;
+		BlockStmt body = cd.getBlock();
+		getBody(attributeMap, attributeNameMap, body);
+		
+		
 	}
 
 	private void getMethodDetails(MethodDeclaration md) {
@@ -190,12 +241,47 @@ public class ClassParser {
 		}
 		classUML += ") : " + md.getType() + "\n" ;
 		BlockStmt body = md.getBody();
-        printBody(attributeMap, attributeNameMap, body);
+		getBody(attributeMap, attributeNameMap, body);
 	}
 	
-	private void printBody(Map<String, List<VariableDeclaratorId>> attributeMap, Map<String, String> attributeNameMap,
+	private void getBody(Map<String, List<VariableDeclaratorId>> attributeMap, Map<String, String> attributeNameMap,
 			BlockStmt body) {
-		// TODO Auto-generated method stub
+		
+		do
+		{	
+			if (body == null) {
+            break;
+		  }
+        List<Statement> expStmntList = body.getStmts();
+        if (expStmntList == null) {
+            break;
+        }
+        for (Statement stmt : expStmntList) {
+            if (stmt instanceof ExpressionStmt) {
+                Expression expression = ((ExpressionStmt) stmt).getExpression();
+                if (expression instanceof VariableDeclarationExpr) {
+                    String depKeyName = ((VariableDeclarationExpr) expression).getType().toString();
+                    if (map.containsKey(depKeyName)) {
+                        // dependency
+                        printDependency(depKeyName);
+
+                        List<VariableDeclaratorId> list = null;
+                        if (attributeMap.containsKey(depKeyName)) {
+                            list = attributeMap.get(depKeyName);
+                        } else {
+                            list = new LinkedList<>();
+                            attributeMap.put(depKeyName,
+                                    list);
+                        }
+                        list.add(((VariableDeclarationExpr) expression).getVars().get(0).getId());
+                        attributeNameMap.put(((VariableDeclarationExpr) expression).getVars().get(0).getId().getName(),
+                        		depKeyName);
+                    }
+                }
+            }
+        }
+	}while(false);
+
 		
 	}
 
