@@ -156,6 +156,9 @@ public class ClassParser {
 		classUML += ret + md.getName() + "( " ;
 		
 		List<Parameter> parameters = md.getParameters();
+        Map<String, List<methodId>> variableMap = new HashMap<>();
+
+        Map<String, String> variableNameMap = new HashMap<>();
 		
 		if (parameters != null && parameters.size() > 0)
 		{
