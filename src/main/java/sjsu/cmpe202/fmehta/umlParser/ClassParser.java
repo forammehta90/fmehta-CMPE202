@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -22,6 +23,7 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
+import com.github.javaparser.ast.body.VariableDeclaratorId;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.ReferenceType;
 import com.github.javaparser.ast.type.Type;
@@ -156,9 +158,9 @@ public class ClassParser {
 		classUML += ret + md.getName() + "( " ;
 		
 		List<Parameter> parameters = md.getParameters();
-        Map<String, List<methodId>> variableMap = new HashMap<>();
+        Map<String, List<VariableDeclaratorId>> attributeMap = new HashMap<>();
 
-        Map<String, String> variableNameMap = new HashMap<>();
+        Map<String, String> attributeNameMap = new HashMap<>();
 		
 		if (parameters != null && parameters.size() > 0)
 		{
@@ -176,6 +178,11 @@ public class ClassParser {
                     String depKeyname = ((ClassOrInterfaceType) type).getName();
                     if (map.containsKey(depKeyname) ) {
                     		printDependency(depKeyname);
+                            List<VariableDeclaratorId> methodId = new LinkedList<>();
+                            methodId.add(p.getId());
+                            attributeMap.put(depKeyname, methodId);
+                            attributeNameMap.put(p.getId().getName(), depKeyname);
+
                     }
                 }
 			}
