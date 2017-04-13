@@ -23,10 +23,10 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.ModifierSet;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.body.VariableDeclaratorId;
 import com.github.javaparser.ast.expr.Expression;
-import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
@@ -180,12 +180,12 @@ public class ClassParser {
 			} else if (n instanceof ConstructorDeclaration) {
                 getConstructorDetails((ConstructorDeclaration) n);
 			}
-		classUML += "}\n" ;	
 		}
+		classUML += "}\n" ;	
 	}
 
 	private void getConstructorDetails(ConstructorDeclaration cd) {
-		if (cd.getModifiers() != Modifier.PUBLIC)
+		if (!((cd.getModifiers() & ModifierSet.PUBLIC) != 0))
 		return;
 		
 		String ret = printType(cd.getModifiers());
@@ -229,7 +229,8 @@ public class ClassParser {
 	}
 
 	private void getMethodDetails(MethodDeclaration md) {
-		if (md.getModifiers() != Modifier.PUBLIC)
+		System.out.println("md.getName() + md.getModifiers" + md.getName() + md.getModifiers());
+		if (!((md.getModifiers() & ModifierSet.PUBLIC) != 0))
 		return;
 		
 		String ret = printType(md.getModifiers());
