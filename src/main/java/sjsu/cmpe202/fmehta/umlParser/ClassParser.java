@@ -94,9 +94,9 @@ public class ClassParser {
     private void printUMLRelation() {
         for (Map.Entry<String, UmlRelation> entry : assrelationMap.entrySet()) {
             UmlRelation rel = entry.getValue();
-            classUML += rel.getA().getName() + " ";
-            if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityA().length() > 0) {
-            	classUML += "\"" + rel.getMultiplicityA() + "\"";	
+            classUML += rel.get_currClassifier().getName() + " ";
+            if (rel.getType() == UmlRelationType.AS && rel.getMultiplicity_currClassifier().length() > 0) {
+            	classUML += "\"" + rel.getMultiplicity_currClassifier() + "\"";	
             }
             classUML += " " + rel.getType().getRelationship() + " ";
             if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityB().length() > 0) {
@@ -107,9 +107,9 @@ public class ClassParser {
         
         for (Map.Entry<String, UmlRelation> entry : deprelationMap.entrySet()) {
             UmlRelation rel = entry.getValue();
-            classUML += rel.getA().getName() + " ";
-            if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityA().length() > 0) {
-            	classUML += "\"" + rel.getMultiplicityA() + "\"";	
+            classUML += rel.get_currClassifier().getName() + " ";
+            if (rel.getType() == UmlRelationType.AS && rel.getMultiplicity_currClassifier().length() > 0) {
+            	classUML += "\"" + rel.getMultiplicity_currClassifier() + "\"";	
             }
             classUML += " " + rel.getType().getRelationship() + " ";
             if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityB().length() > 0) {
@@ -120,9 +120,9 @@ public class ClassParser {
         
         for (Map.Entry<String, UmlRelation> entry : relationMap.entrySet()) {
             UmlRelation rel = entry.getValue();
-            classUML += rel.getA().getName() + " ";
-            if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityA().length() > 0) {
-            	classUML += "\"" + rel.getMultiplicityA() + "\"";	
+            classUML += rel.get_currClassifier().getName() + " ";
+            if (rel.getType() == UmlRelationType.AS && rel.getMultiplicity_currClassifier().length() > 0) {
+            	classUML += "\"" + rel.getMultiplicity_currClassifier() + "\"";	
             }
             classUML += " " + rel.getType().getRelationship() + " ";
             if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityB().length() > 0) {
@@ -418,7 +418,7 @@ public class ClassParser {
 		String assosciateKey = getAssosciation(currCID.getName(), dependCID.getName());
         if (assrelationMap.containsKey(assosciateKey)) {
             UmlRelation r = assrelationMap.get(assosciateKey);
-            r.setMultiplicityA(multiplicity);
+            r.setMultiplicity_currClassifier(multiplicity);
         }
         else {
         	assrelationMap.put(assosciateKey, new UmlRelation(currCID,

@@ -18,19 +18,19 @@ public class UmlRelation {
         this.type = type;
     }
 
-    public ClassOrInterfaceDeclaration getA() {
+    public ClassOrInterfaceDeclaration get_currClassifier() {
         return currClassifier;
     }
 
-    public void setA(ClassOrInterfaceDeclaration currClassifier) {
+    public void set_currClassifier(ClassOrInterfaceDeclaration currClassifier) {
         this.currClassifier = currClassifier;
     }
 
-    public String getMultiplicityA() {
+    public String getMultiplicity_currClassifier() {
         return mltplcty_currClassifier;
     }
 
-    public void setMultiplicityA(String mltplcty_currClassifier) {
+    public void setMultiplicity_currClassifier(String mltplcty_currClassifier) {
         this.mltplcty_currClassifier = mltplcty_currClassifier;
     }
 
