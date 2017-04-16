@@ -46,6 +46,7 @@ public class ClassParser {
 	ClassOrInterfaceDeclaration currCID = null;
 	private Map<String, UmlRelation> assrelationMap = new HashMap<String, UmlRelation>();
 	private Map<String, UmlRelation> deprelationMap = new HashMap<String, UmlRelation>();
+	private Map<String, UmlRelation> relationMap = new HashMap<String, UmlRelation>();
 	
 	
 	public ClassParser(String path, String filename) {
@@ -116,6 +117,20 @@ public class ClassParser {
             }
             classUML += " " + rel.getB().getName() + "\n";
         }
+        
+        for (Map.Entry<String, UmlRelation> entry : relationMap.entrySet()) {
+            UmlRelation rel = entry.getValue();
+            classUML += rel.getA().getName() + " ";
+            if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityA().length() > 0) {
+            	classUML += "\"" + rel.getMultiplicityA() + "\"";	
+            }
+            classUML += " " + rel.getType().getS() + " ";
+            if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityB().length() > 0) {
+                classUML += "\"" + rel.getMultiplicityB() + "\"";
+            }
+            classUML += " " + rel.getB().getName() + "\n";
+        }
+
     }	
 	
 
@@ -161,7 +176,7 @@ public class ClassParser {
                 String name = classType.getName();
                 if (map.containsKey(name)) {
                     String relationKey = name + "_" + cid.getName();
-                    deprelationMap.put(relationKey,
+                    relationMap.put(relationKey,
                             new UmlRelation(map.get(name), "", cid, "", UmlRelationType.EX));
                 }
             }
@@ -174,7 +189,7 @@ public class ClassParser {
                 String name = interfaceType.getName();
                 if (map.containsKey(name)) {
                     String relationKey = name + "_" + cid.getName();
-                    deprelationMap.put(relationKey,
+                    relationMap.put(relationKey,
                             new UmlRelation(map.get(name), "", cid, "", UmlRelationType.IM));
                 }
             }
@@ -226,7 +241,8 @@ public class ClassParser {
                 if (type instanceof ClassOrInterfaceType) {
                     String depKeyname = ((ClassOrInterfaceType) type).getName();
                     if (map.containsKey(depKeyname) ) {
-                    		printDependency(depKeyname);
+                    		if (!currCID.isInterface())
+                    			printDependency(depKeyname);
                             List<VariableDeclaratorId> methodId = new LinkedList<>();
                             methodId.add(p.getId());
                             attributeMap.put(depKeyname, methodId);
@@ -331,14 +347,14 @@ public class ClassParser {
 	private void printDependency(String depKeyname) {
 		ClassOrInterfaceDeclaration depCID = map.get(depKeyname);
     	String depKey = getAssosciation(depKeyname, currCID.getName());
-        if (!deprelationMap.containsKey(depKey) && depCID.isInterface()) {
+        /*if (!deprelationMap.containsKey(depKey) && depCID.isInterface()) {
             deprelationMap.put(depKey,
                     new UmlRelation(depCID, "", this.currCID, "", UmlRelationType.DEP));
-        }
-    	/*if (depCID.isInterface()) {
-            relationMap.put(depKey,
+        }*/
+    	if (depCID.isInterface()) {
+            deprelationMap.put(depKey,
                     new UmlRelation(depCID, "", this.currCID, "", UmlRelationType.DEP));
-    	}*/
+    	}
 		
 	}
 
