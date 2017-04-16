@@ -5,8 +5,7 @@ public enum UmlRelationType {
 	    EX("<|--"),
 	    IM("<|.."),
 	    AS("--"),
-	    DEP("<.."),
-	    LOLI("()--");
+	    DEP("<..");
 
 	    private String relationship;
 	    UmlRelationType(String s) {
