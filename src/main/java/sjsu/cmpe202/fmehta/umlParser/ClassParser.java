@@ -260,7 +260,7 @@ public class ClassParser {
 	}
 
 	private void getMethodDetails(MethodDeclaration md) {
-		System.out.println("md.getName() + md.getModifiers" + md.getName() + md.getModifiers());
+		/* Only public methods considered */
 		if (!((md.getModifiers() & ModifierSet.PUBLIC) != 0))
 		return;
 		
@@ -378,7 +378,6 @@ public class ClassParser {
 					}
 				} else if (((ClassOrInterfaceType) refType).getTypeArgs() != null) { 
 					// Collection<A>
-					System.out.println("((ClassOrInterfaceType) refType).getTypeArgs()" + ((ClassOrInterfaceType) refType).getTypeArgs());
 					Type refArg = ((ClassOrInterfaceType) refType).getTypeArgs().get(0);
 					if (refArg instanceof ReferenceType) {
                     	Type subType = ((ReferenceType) refArg).getType();
@@ -450,7 +449,6 @@ public class ClassParser {
 				s="";
 				break;
 		}
-		System.out.println("s" + s); 
 		return s;
 	}
 
