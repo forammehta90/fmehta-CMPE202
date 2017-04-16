@@ -363,7 +363,7 @@ public class ClassParser {
 		String ret = null;
 		
 		/* Including Private and Public Attributes */
-		if (fd.getModifiers() != Modifier.PRIVATE && fd.getModifiers() != Modifier.PUBLIC)
+		if (fd.getModifiers() != Modifier.PRIVATE && fd.getModifiers() != Modifier.PUBLIC && fd.getModifiers() != Modifier.PROTECTED)
 			return;
 		
 		Type t = fd.getType();
