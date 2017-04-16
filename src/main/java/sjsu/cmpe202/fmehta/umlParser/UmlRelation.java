@@ -4,14 +4,14 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 
 public class UmlRelation {
 
-    private ClassOrInterfaceDeclaration a;
+    private ClassOrInterfaceDeclaration currClassifier;
     private String multiplicityA;
     private ClassOrInterfaceDeclaration b;
     private String multiplicityB;
     private UmlRelationType type;
 
-    public UmlRelation(ClassOrInterfaceDeclaration a, String multiplicityA, ClassOrInterfaceDeclaration b, String multiplicityB, UmlRelationType type) {
-        this.a = a;
+    public UmlRelation(ClassOrInterfaceDeclaration currClassifier, String multiplicityA, ClassOrInterfaceDeclaration b, String multiplicityB, UmlRelationType type) {
+        this.currClassifier = currClassifier;
         this.multiplicityA = multiplicityA;
         this.b = b;
         this.multiplicityB = multiplicityB;
@@ -19,11 +19,11 @@ public class UmlRelation {
     }
 
     public ClassOrInterfaceDeclaration getA() {
-        return a;
+        return currClassifier;
     }
 
-    public void setA(ClassOrInterfaceDeclaration a) {
-        this.a = a;
+    public void setA(ClassOrInterfaceDeclaration currClassifier) {
+        this.currClassifier = currClassifier;
     }
 
     public String getMultiplicityA() {
