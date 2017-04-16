@@ -98,7 +98,7 @@ public class ClassParser {
             if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityA().length() > 0) {
             	classUML += "\"" + rel.getMultiplicityA() + "\"";	
             }
-            classUML += " " + rel.getType().getS() + " ";
+            classUML += " " + rel.getType().getRelationship() + " ";
             if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityB().length() > 0) {
                 classUML += "\"" + rel.getMultiplicityB() + "\"";
             }
@@ -111,7 +111,7 @@ public class ClassParser {
             if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityA().length() > 0) {
             	classUML += "\"" + rel.getMultiplicityA() + "\"";	
             }
-            classUML += " " + rel.getType().getS() + " ";
+            classUML += " " + rel.getType().getRelationship() + " ";
             if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityB().length() > 0) {
                 classUML += "\"" + rel.getMultiplicityB() + "\"";
             }
@@ -124,7 +124,7 @@ public class ClassParser {
             if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityA().length() > 0) {
             	classUML += "\"" + rel.getMultiplicityA() + "\"";	
             }
-            classUML += " " + rel.getType().getS() + " ";
+            classUML += " " + rel.getType().getRelationship() + " ";
             if (rel.getType() == UmlRelationType.AS && rel.getMultiplicityB().length() > 0) {
                 classUML += "\"" + rel.getMultiplicityB() + "\"";
             }
@@ -347,14 +347,14 @@ public class ClassParser {
 	private void printDependency(String depKeyname) {
 		ClassOrInterfaceDeclaration depCID = map.get(depKeyname);
     	String depKey = getAssosciation(depKeyname, currCID.getName());
-        /*if (!deprelationMap.containsKey(depKey) && depCID.isInterface()) {
+        if (!deprelationMap.containsKey(depKey) && depCID.isInterface()) {
             deprelationMap.put(depKey,
                     new UmlRelation(depCID, "", this.currCID, "", UmlRelationType.DEP));
-        }*/
-    	if (depCID.isInterface()) {
+        }
+    	/*if (depCID.isInterface()) {
             deprelationMap.put(depKey,
                     new UmlRelation(depCID, "", this.currCID, "", UmlRelationType.DEP));
-    	}
+    	}*/
 		
 	}
 

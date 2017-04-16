@@ -8,12 +8,12 @@ public enum UmlRelationType {
 	    DEP("<.."),
 	    LOLI("()--");
 
-	    private String s;
+	    private String relationship;
 	    UmlRelationType(String s) {
-	        this.s = s;
+	        this.relationship = s;
 	    }
-	    public String getS() {
-	        return s;
+	    public String getRelationship() {
+	        return relationship;
 	    }
 	}
 
