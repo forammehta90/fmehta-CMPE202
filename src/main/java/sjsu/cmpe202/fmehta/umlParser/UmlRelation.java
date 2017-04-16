@@ -6,14 +6,14 @@ public class UmlRelation {
 
     private ClassOrInterfaceDeclaration currClassifier;
     private String mltplcty_currClassifier;
-    private ClassOrInterfaceDeclaration b;
+    private ClassOrInterfaceDeclaration depClassifier;
     private String multiplicityB;
     private UmlRelationType type;
 
-    public UmlRelation(ClassOrInterfaceDeclaration currClassifier, String mltplcty_currClassifier, ClassOrInterfaceDeclaration b, String multiplicityB, UmlRelationType type) {
+    public UmlRelation(ClassOrInterfaceDeclaration currClassifier, String mltplcty_currClassifier, ClassOrInterfaceDeclaration depClassifier, String multiplicityB, UmlRelationType type) {
         this.currClassifier = currClassifier;
         this.mltplcty_currClassifier = mltplcty_currClassifier;
-        this.b = b;
+        this.depClassifier = depClassifier;
         this.multiplicityB = multiplicityB;
         this.type = type;
     }
@@ -35,11 +35,11 @@ public class UmlRelation {
     }
 
     public ClassOrInterfaceDeclaration getB() {
-        return b;
+        return depClassifier;
     }
 
-    public void setB(ClassOrInterfaceDeclaration b) {
-        this.b = b;
+    public void setB(ClassOrInterfaceDeclaration depClassifier) {
+        this.depClassifier = depClassifier;
     }
 
     public String getMultiplicityB() {
