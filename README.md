@@ -11,3 +11,5 @@ create joinpoints and aspect of test class
 check the current object and method parsing
 
 build the aspects.
+
+build the logic
