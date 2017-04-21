@@ -18,3 +18,5 @@ Sequence diagram sequence incorrect. to be rectified.
 
 how to use plantUML
 building up for sequence diagram iput required.
+
+sequence diagram method calls.
