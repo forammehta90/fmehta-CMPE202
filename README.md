@@ -28,3 +28,5 @@ return statements
 resolving errors.
 
 timeframe not correct. resolving timeframe
+
+resolving joinpoint conditions
