@@ -24,3 +24,5 @@ sequence diagram method calls.
 timebox management
 
 return statements
+
+resolving errors.
