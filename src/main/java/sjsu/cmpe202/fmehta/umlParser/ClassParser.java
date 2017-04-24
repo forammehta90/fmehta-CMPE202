@@ -283,10 +283,13 @@ public class ClassParser {
 					classUML += ", " ;
 				}
 				classUML += p.getId().getName() + " : " + t;
-				Type type = ((ReferenceType) t).getType();
-                if (type instanceof ClassOrInterfaceType) {
-                    String depKeyname = ((ClassOrInterfaceType) type).getName();
-                    if (map.containsKey(depKeyname) ) {
+				
+				if (t instanceof ReferenceType) 
+				{	
+					Type type = ((ReferenceType) t).getType();
+					if (type instanceof ClassOrInterfaceType) {
+						String depKeyname = ((ClassOrInterfaceType) type).getName();
+						if (map.containsKey(depKeyname) ) {
                     		if (!currCID.isInterface())
                     			printDependency(depKeyname);
                             List<VariableDeclaratorId> methodId = new LinkedList<>();
@@ -294,8 +297,9 @@ public class ClassParser {
                             attributeMap.put(depKeyname, methodId);
                             attributeNameMap.put(p.getId().getName(), depKeyname);
 
-                    }
-                }
+						}
+					}
+				}
 			}
 		}
 		classUML += ") : " + md.getType() + "\n" ;
