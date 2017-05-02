@@ -30,3 +30,7 @@ timeframe not correct. resolving timeframe
 resolving joinpoint conditions
 
 thinking of how to integrate plantUML
+
+putting parameters if any.
+
+Refactoring
