@@ -8,22 +8,17 @@ public class Umlparser {
 
 	public static void main(String[] args) {
 		System.out.println("args lenth" + args.length);
-		if (args.length == 3)
+		if (args.length == 2)
 		{
-			if (args[0].equalsIgnoreCase("class"))
-			{
-				ClassParser cp = new ClassParser(args[1],args[2]);
+				String output_file = args[0]+"\\"+args[1]+".png";
+				System.out.println("output_file"+output_file);
+				ClassParser cp = new ClassParser(args[0],output_file);
 				cp.start();
-			}
-			else
-			{
-				System.out.println("Invalid input" + args[0]);
-				System.exit(0);
-			}
 		}
 		else
 		{
 			System.out.println("Incorrect arguments.<diagram_reqd><Path><output filename>");
+			System.exit(0);
 		}
 			
 	}

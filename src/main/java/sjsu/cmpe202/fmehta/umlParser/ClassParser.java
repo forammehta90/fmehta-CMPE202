@@ -182,7 +182,7 @@ public class ClassParser {
             }
         }
 
-        // 3. implementation
+        // 3. Interface
         List<ClassOrInterfaceType> interfaceList = cid.getImplements();
         if (interfaceList != null) {
             for (ClassOrInterfaceType interfaceType : interfaceList) {
@@ -448,6 +448,18 @@ public class ClassParser {
 				break;
 			case Modifier.PRIVATE:
 				s="-";
+				break;
+			case Modifier.ABSTRACT:
+				s="+";
+				break;
+			case 1025:
+				s="+";
+				break;
+			case 9:
+				s="+";
+				break;
+			case Modifier.PROTECTED:
+				s="#";
 				break;
 			default:
 				s="";
