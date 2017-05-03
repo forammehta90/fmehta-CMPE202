@@ -11,7 +11,7 @@ public class Umlparser {
 		if (args.length == 2)
 		{
 				String output_file = args[0]+"\\"+args[1]+".png";
-				System.out.println("output_file"+output_file);
+				//System.out.println("output_file"+output_file);
 				ClassParser cp = new ClassParser(args[0],output_file);
 				cp.start();
 		}
