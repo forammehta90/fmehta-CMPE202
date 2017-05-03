@@ -1,15 +1,25 @@
 uml-class-generator-java
+
 A Parser which converts Java Source Code into a UML Class Diagram
 ________________________________________
 Compile Instructions
+
 Requirements:
+
 •	Java JDK version 1.8
+
 The program expects following arguments:
+
 1.	Path:
+
 •	Full path of the folder which contains all the .java source files. The program picks only the .java files and ignores other files.
+
 •	Example - C:\foram\cmpe202_umlParser\code\uml-parser-test-4
+
 2.	Filename:
+
 •	One word String.
+
 •	Example – class_diagram
 Example: - To generate class diagram
 java -jar classparser.jar C:\foram\cmpe202_umlParser\code\uml-parser-test-4 class_diagram
