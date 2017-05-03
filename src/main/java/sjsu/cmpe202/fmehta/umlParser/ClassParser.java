@@ -87,7 +87,7 @@ public class ClassParser {
 		printUMLRelation();
 		
 		classUML += "@enduml\n";
-		System.out.println(classUML);
+		//System.out.println(classUML);
 		drawClass(filename,classUML);
 	}
 	

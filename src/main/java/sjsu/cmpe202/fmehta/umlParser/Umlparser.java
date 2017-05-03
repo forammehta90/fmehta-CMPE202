@@ -7,7 +7,7 @@ package sjsu.cmpe202.fmehta.umlParser;
 public class Umlparser {
 
 	public static void main(String[] args) {
-		System.out.println("args lenth" + args.length);
+		//System.out.println("args lenth" + args.length);
 		if (args.length == 2)
 		{
 				String output_file = args[0]+"\\"+args[1]+".png";
