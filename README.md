@@ -1,14 +1,10 @@
 uml-class-generator-java
-
 A Parser which converts Java Source Code into a UML Class Diagram
 ________________________________________
 Compile Instructions
-
 Requirements:
 •	Java JDK version 1.8
-
 The program expects following arguments:
-
 1.	Path:
 •	Full path of the folder which contains all the .java source files. The program picks only the .java files and ignores other files.
 •	Example - C:\foram\cmpe202_umlParser\code\uml-parser-test-4
@@ -42,5 +38,3 @@ Tools
 •	Jar File : plantuml.jar version:8031
 •	Java Source Code UML diagram is generated using this tool.
 •	Graphviz software is required to use this tool and generate diagrams. Graphviz must be installed into your system. Download Graphviz from: http://www.graphviz.org/
-
-
