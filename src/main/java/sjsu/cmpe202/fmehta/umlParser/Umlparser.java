@@ -1,6 +1,8 @@
 
 package sjsu.cmpe202.fmehta.umlParser;
 
+import java.io.File;
+
 /**
  * @author fmehta : 02/28/2017
  */
@@ -10,7 +12,7 @@ public class Umlparser {
 		//System.out.println("args lenth" + args.length);
 		if (args.length == 2)
 		{
-				String output_file = args[0]+"\\"+args[1]+".png";
+				String output_file = args[0]+File.separator+args[1]+".png";
 				//System.out.println("output_file"+output_file);
 				ClassParser cp = new ClassParser(args[0],output_file);
 				cp.start();

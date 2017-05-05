@@ -222,9 +222,9 @@ public class ClassParser {
 		classUML += ret + cd.getName() + "( " ;
 		
 		List<Parameter> parameters = cd.getParameters();
-        Map<String, List<VariableDeclaratorId>> attributeMap = new HashMap<>();
+        Map<String, List<VariableDeclaratorId>> attributeMap = new HashMap<String, List<VariableDeclaratorId>>();
 
-        Map<String, String> attributeNameMap = new HashMap<>();
+        Map<String, String> attributeNameMap = new HashMap<String, String>();
 		
 		if (parameters != null && parameters.size() > 0)
 		{
@@ -243,7 +243,7 @@ public class ClassParser {
                     if (map.containsKey(depKeyname) ) {
                     		if (!currCID.isInterface())
                     			printDependency(depKeyname);
-                            List<VariableDeclaratorId> methodId = new LinkedList<>();
+                            List<VariableDeclaratorId> methodId = new LinkedList<VariableDeclaratorId>();
                             methodId.add(p.getId());
                             attributeMap.put(depKeyname, methodId);
                             attributeNameMap.put(p.getId().getName(), depKeyname);
@@ -268,9 +268,9 @@ public class ClassParser {
 		classUML += ret + md.getName() + "( " ;
 		
 		List<Parameter> parameters = md.getParameters();
-        Map<String, List<VariableDeclaratorId>> attributeMap = new HashMap<>();
+        Map<String, List<VariableDeclaratorId>> attributeMap = new HashMap<String, List<VariableDeclaratorId>>();
 
-        Map<String, String> attributeNameMap = new HashMap<>();
+        Map<String, String> attributeNameMap = new HashMap<String, String>();
 		
 		if (parameters != null && parameters.size() > 0 )
 		{
@@ -292,7 +292,7 @@ public class ClassParser {
 						if (map.containsKey(depKeyname) ) {
                     		if (!currCID.isInterface())
                     			printDependency(depKeyname);
-                            List<VariableDeclaratorId> methodId = new LinkedList<>();
+                            List<VariableDeclaratorId> methodId = new LinkedList<VariableDeclaratorId>();
                             methodId.add(p.getId());
                             attributeMap.put(depKeyname, methodId);
                             attributeNameMap.put(p.getId().getName(), depKeyname);
@@ -332,7 +332,7 @@ public class ClassParser {
                         if (attributeMap.containsKey(depKeyName)) {
                             list = attributeMap.get(depKeyName);
                         } else {
-                            list = new LinkedList<>();
+                            list = new LinkedList<VariableDeclaratorId>();
                             attributeMap.put(depKeyName,
                                     list);
                         }
